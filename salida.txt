@@ -1,0 +1,7 @@
+=== Proyectos ===
+Proyecto: 1
+  Nombre: Proyecto final
+  Descripción: Obligatorio final de clase
+  Fecha Límite: 1003882
+  Tareas:
+    - tareaid: Realizar layout (Agustin)
