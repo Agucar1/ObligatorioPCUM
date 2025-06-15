@@ -16,7 +16,7 @@ def crear_tarea(args, proyectos, salida): # creamos un proyecto apartir de 6 par
         except ValueError:
             salida.append("Error: Fecha límite inválida. Usa formato AAAAMMDD con una fecha real.")
             return
-
+        
         id_proyecto = None  
         for pid, proyecto in proyectos.items(): # Busca por nombre el ID del proyecto
             if proyecto["Nombre"].lower() == nombre_proyecto.lower():
@@ -26,6 +26,19 @@ def crear_tarea(args, proyectos, salida): # creamos un proyecto apartir de 6 par
         if id_proyecto is None: # Si no encuentra el nombre del proyecto por ID te comunica que no existe
             salida.append(f"Error: El proyecto '{nombre_proyecto}' no existe.")
             return
+        
+        try: 
+           fecha_limite_proyecto = proyectos[id_proyecto]['FechaLimite']
+           # Convertir a string si es int
+           if isinstance(fecha_limite_proyecto, int):
+             fecha_limite_proyecto = str(fecha_limite_proyecto)
+           fecha_proyecto = datetime.strptime(fecha_limite_proyecto, "%Y%m%d")
+           if fecha_obj > fecha_proyecto:
+             salida.append("Error: La fecha de la tarea no puede ser posterior a la fecha límite del proyecto.")
+             return
+        except (KeyError, ValueError):
+           salida.append("Error: Fecha del proyecto inválida o no encontrada.")
+           return
 
         tareas = proyectos[id_proyecto]["Tareas"] # Generamos usa ruta mas corta para las tareas del proyecto
 
@@ -34,9 +47,9 @@ def crear_tarea(args, proyectos, salida): # creamos un proyecto apartir de 6 par
                 salida.append(f"Ya existe una tarea con el nombre '{nombre}' en el proyecto '{nombre_proyecto}'")
                 return
             
-        if estado != "EN_PROGRESO" or estado != "COMPLETADA" or  estado != "PENDIENTE": # Validamos que el estado unicamente pueda ser uno de estos 3
-            salida.append(f"Error: el estado no puede ser distinto a EN_PROGRESO, COMPLETADA o PENDIENTE")
-            return
+        if estado not in ["EN_PROGRESO", "COMPLETADA", "PENDIENTE"]:
+         salida.append("Error: el estado debe ser EN_PROGRESO, COMPLETADA o PENDIENTE")
+         return
 
 
         if tareas: # Generamos una nueva id para la tarea
@@ -48,7 +61,7 @@ def crear_tarea(args, proyectos, salida): # creamos un proyecto apartir de 6 par
             "Nombre": nombre,
             "Descripcion": descripcion,
             "Responsable": responsable,
-            "FechaLimite": int(fecha_str),
+            "FechaLimite": fecha_str,
             "Estado": estado
         }
 

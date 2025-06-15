@@ -4,7 +4,7 @@ def crear_proyecto(args, proyectos, salida): # creamos un proyecto apartir de 3 
     try:
         nombre = args[1] 
         descripcion = args[2]
-        fecha_limite = int(args[3])
+        fecha_limite = args[3]
 
         for p in proyectos.values(): #recorremos proyectos para checkear que el nombre del mismo no exista
             if p["Nombre"].lower() == nombre.lower():
