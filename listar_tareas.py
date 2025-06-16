@@ -38,4 +38,4 @@ def listar_tareas(args, proyectos, salida):
         return
 
     for tid, tarea in tareas_mostrar.items():
-        salida.append(f"- [{tid}] {tarea['Nombre']} - Responsable: {tarea['Responsable']} - Estado: {tarea['Estado']}")
+        salida.append(f"- [{tid}] {tarea['Nombre']} - Responsable: {tarea['Responsable']} - Fecha limite: {tarea['FechaLimite']}- Estado: {tarea['Estado']} ")

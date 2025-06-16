@@ -16,20 +16,20 @@ class TestActualizarTarea(unittest.TestCase):
             "1": {
                 "Nombre": "Proyecto1",
                 "Descripcion": "Descripción del proyecto",
-                "FechaLimite": "20250630",
+                "FechaLimite": "2025-06-30",
                 "Tareas": {
                     "1": {
                         "Nombre": "Tarea1",
                         "Descripcion": "Hacer obligatorio",
                         "Responsable": "Ricardo Melendez",
-                        "FechaLimite": "20250615",
+                        "FechaLimite": "2025-06-15",
                         "Estado": "PENDIENTE"
                     },
                     "2": {
                         "Nombre": "Tarea2",
                         "Descripcion": "Estudiar parcial",
                         "Responsable": "María López",
-                        "FechaLimite": "20250620",
+                        "FechaLimite": "2025-06-20",
                         "Estado": "EN_PROGRESO"
                     }
                 }

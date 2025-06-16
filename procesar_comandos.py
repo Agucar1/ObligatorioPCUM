@@ -2,6 +2,7 @@ from crear_proyecto import crear_proyecto
 from listar_proyectos import listar_proyectos
 from crear_tarea import crear_tarea
 from listar_tareas import listar_tareas
+from actualizar_tarea import actualizar_tarea
 import manejoJson 
 
 def procesar_comandos(args):
@@ -24,7 +25,10 @@ def procesar_comandos(args):
         crear_tarea(args, proyectos, salida)
 
     elif comando == "listar_tareas":
-        listar_tareas(args, proyectos, salida)    
+        listar_tareas(args, proyectos, salida)
+
+    elif comando == "actualizar_tarea":
+        actualizar_tarea(args, proyectos, salida)          
 
     else:
         salida.append(f"Comando no reconocido: '{comando}'")

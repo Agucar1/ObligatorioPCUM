@@ -16,21 +16,24 @@ class TestListarTareas(unittest.TestCase):
             "1": {
                 "Nombre": "Proyecto1",
                 "Descripcion": "Descripción del proyecto",
-                "FechaLimite": "20250630",
+                "FechaLimite": "2025-06-30",
                 "Tareas": {
                     "1": {
                         "Nombre": "Tarea1",
                         "Responsable": "Ricardo Melendez",
+                        "FechaLimite": "2025-06-20",
                         "Estado": "PENDIENTE"
                     },
                     "2": {
                         "Nombre": "Tarea2",
                         "Responsable": "María López",
+                        "FechaLimite": "2025-06-20",
                         "Estado": "EN_PROGRESO"
                     },
                     "3": {
                         "Nombre": "Tarea3",
                         "Responsable": "Juan Pérez",
+                        "FechaLimite": "2025-06-20",
                         "Estado": "PENDIENTE"
                     }
                 }

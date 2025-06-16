@@ -16,7 +16,7 @@ class TestCrearTarea(unittest.TestCase):
             "1": {
                 "Nombre": "Proyecto1",
                 "Descripcion": "Descripción del proyecto",
-                "FechaLimite": "20250630",
+                "FechaLimite": "2025-06-30",
                 "Tareas": {}
             }
         }
@@ -24,7 +24,7 @@ class TestCrearTarea(unittest.TestCase):
     
     def test_crear_tarea_exitosa(self):
         """Test: Crear una tarea exitosamente (caso básico del obligatorio)"""
-        args = ["crear_tarea", "Proyecto1", "Tarea1", "Hacer obligatorio", "Juan Pérez", "20250615", "PENDIENTE"]
+        args = ["crear_tarea", "Proyecto1", "Tarea1", "Hacer obligatorio", "Juan Pérez", "2025-06-15", "PENDIENTE"]
         
         # Simular guardar_proyectos para evitar crear archivos durante tests
         import manejoJson
@@ -44,7 +44,7 @@ class TestCrearTarea(unittest.TestCase):
         self.assertEqual(tarea["Nombre"], "Tarea1")
         self.assertEqual(tarea["Descripcion"], "Hacer obligatorio")
         self.assertEqual(tarea["Responsable"], "Juan Pérez")
-        self.assertEqual(tarea["FechaLimite"], "20250615")
+        self.assertEqual(tarea["FechaLimite"], "2025-06-15")
         self.assertEqual(tarea["Estado"], "PENDIENTE")
         
         self.assertEqual(len(self.salida), 1)
@@ -52,7 +52,7 @@ class TestCrearTarea(unittest.TestCase):
     
     def test_crear_tarea_proyecto_no_existe(self):
         """Test: Error al crear tarea en proyecto inexistente"""
-        args = ["crear_tarea", "ProyectoInexistente", "Tarea1", "Descripción", "Usuario", "20250615", "PENDIENTE"]
+        args = ["crear_tarea", "ProyectoInexistente", "Tarea1", "Descripción", "Usuario", "2025-06-15", "PENDIENTE"]
         
         crear_tarea(args, self.proyectos, self.salida)
         
@@ -68,12 +68,12 @@ class TestCrearTarea(unittest.TestCase):
             "Nombre": "Tarea1",
             "Descripcion": "Descripción",
             "Responsable": "Usuario",
-            "FechaLimite": "20250615",
+            "FechaLimite": "2025-06-15",
             "Estado": "PENDIENTE"
         }
         
         # Intentar crear tarea con mismo nombre
-        args = ["crear_tarea", "Proyecto1", "Tarea1", "Nueva descripción", "Otro Usuario", "20250620", "PENDIENTE"]
+        args = ["crear_tarea", "Proyecto1", "Tarea1", "Nueva descripción", "Otro Usuario", "2025-06-20", "PENDIENTE"]
         
         crear_tarea(args, self.proyectos, self.salida)
         
@@ -84,8 +84,8 @@ class TestCrearTarea(unittest.TestCase):
     
     def test_crear_tarea_fecha_posterior_proyecto(self):
         """Test: Error por fecha de tarea posterior a proyecto (requerido por obligatorio)"""
-        args = ["crear_tarea", "Proyecto1", "Tarea1", "Descripción", "Usuario", "20250701", "PENDIENTE"]
-        # Fecha proyecto: 20250630, Fecha tarea: 20250701 (posterior)
+        args = ["crear_tarea", "Proyecto1", "Tarea1", "Descripción", "Usuario", "2025-07-01", "PENDIENTE"]
+        # Fecha proyecto: 2025-06-30, Fecha tarea: 2025-07-01 (posterior)
         
         crear_tarea(args, self.proyectos, self.salida)
         
@@ -104,13 +104,13 @@ class TestCrearTarea(unittest.TestCase):
                 "1": {
                     "Nombre": "Proyecto1",
                     "Descripcion": "Descripción del proyecto",
-                    "FechaLimite": "20250630",
+                    "FechaLimite": "2025-06-30",
                     "Tareas": {}
                 }
             }
             salida_test = []
             
-            args = ["crear_tarea", "Proyecto1", f"Tarea{i}", "Descripción", "Usuario", "20250615", estado]
+            args = ["crear_tarea", "Proyecto1", f"Tarea{i}", "Descripción", "Usuario", "2025-06-15", estado]
             
             # Simular guardar_proyectos
             import manejoJson
@@ -128,7 +128,7 @@ class TestCrearTarea(unittest.TestCase):
     
     def test_crear_tarea_estado_invalido(self):
         """Test: Error por estado inválido"""
-        args = ["crear_tarea", "Proyecto1", "Tarea1", "Descripción", "Usuario", "20250615", "ESTADO_INVALIDO"]
+        args = ["crear_tarea", "Proyecto1", "Tarea1", "Descripción", "Usuario", "2025-06-15", "ESTADO_INVALIDO"]
         
         crear_tarea(args, self.proyectos, self.salida)
         
@@ -139,7 +139,7 @@ class TestCrearTarea(unittest.TestCase):
     
     def test_crear_tarea_fecha_invalida(self):
         """Test: Error por fecha con formato inválido"""
-        args = ["crear_tarea", "Proyecto1", "Tarea1", "Descripción", "Usuario", "2025-06-15", "PENDIENTE"]
+        args = ["crear_tarea", "Proyecto1", "Tarea1", "Descripción", "Usuario", "2025/06/15", "PENDIENTE"]
         
         crear_tarea(args, self.proyectos, self.salida)
         

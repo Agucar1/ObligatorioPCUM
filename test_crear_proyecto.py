@@ -67,7 +67,7 @@ class TestCrearProyecto(unittest.TestCase):
         self.proyectos["1"] = {
             "Nombre": "Proyecto1",
             "Descripcion": "Descripción",
-            "FechaLimite": "20250630", 
+            "FechaLimite": "2025-06-30", 
             "Tareas": {}
         }
         

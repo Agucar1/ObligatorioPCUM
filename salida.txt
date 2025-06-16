@@ -1,3 +1,2 @@
-=== Tareas del proyecto 'Obligatorio' ===
-- [1] Funcionalidad crear proyecto - Responsable: Agustin - Estado: COMPLETADA
-- [2] Funcionalidad crear tarea - Responsable: Agustin - Estado: COMPLETADA
+=== Tareas del proyecto 'CHATGPT 4.0' ===
+- [1] Prueba 2 - Responsable: Agustin - Fecha limite: 2025-02-09- Estado: COMPLETADA 

@@ -12,9 +12,9 @@ def crear_tarea(args, proyectos, salida): # creamos un proyecto apartir de 6 par
         estado = args[6]
 
         try: # Validamos la fecha
-            fecha_obj = datetime.strptime(fecha_str, "%Y%m%d")
+            fecha_obj = datetime.strptime(fecha_str, "%Y-%m-%d")
         except ValueError:
-            salida.append("Error: Fecha límite inválida. Usa formato AAAAMMDD con una fecha real.")
+            salida.append("Error: Fecha límite inválida. Usa formato AAAA-MM-DD con una fecha real.")
             return
         
         id_proyecto = None  
@@ -28,12 +28,9 @@ def crear_tarea(args, proyectos, salida): # creamos un proyecto apartir de 6 par
             return
         
         try: 
-           fecha_limite_proyecto = proyectos[id_proyecto]['FechaLimite']
-           # Convertir a string si es int
-           if isinstance(fecha_limite_proyecto, int):
-             fecha_limite_proyecto = str(fecha_limite_proyecto)
-           fecha_proyecto = datetime.strptime(fecha_limite_proyecto, "%Y%m%d")
-           if fecha_obj > fecha_proyecto:
+           fecha_str_proyecto = proyectos[id_proyecto]['FechaLimite']
+           fecha_limite_proyecto = datetime.strptime(fecha_str_proyecto, "%Y-%m-%d")
+           if fecha_obj > fecha_limite_proyecto:
              salida.append("Error: La fecha de la tarea no puede ser posterior a la fecha límite del proyecto.")
              return
         except (KeyError, ValueError):

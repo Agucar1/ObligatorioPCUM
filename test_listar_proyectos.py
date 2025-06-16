@@ -29,7 +29,7 @@ class TestListarProyectos(unittest.TestCase):
             "1": {
                 "Nombre": "Proyecto1",
                 "Descripcion": "Descripción del proyecto",
-                "FechaLimite": "20250630",
+                "FechaLimite": "2025-06-30",
                 "Tareas": {}
             }
         }
@@ -47,7 +47,7 @@ class TestListarProyectos(unittest.TestCase):
             "1": {
                 "Nombre": "Proyecto1",
                 "Descripcion": "Descripción",
-                "FechaLimite": "20250630",
+                "FechaLimite": "2025-06-30",
                 "Tareas": {
                     "1": {
                         "Nombre": "Tarea1",

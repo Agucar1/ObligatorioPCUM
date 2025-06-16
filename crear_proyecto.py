@@ -29,6 +29,6 @@ def crear_proyecto(args, proyectos, salida): # creamos un proyecto apartir de 3 
     except IndexError: # Gestionamos errores de falta de parametros y error de fecha.
         salida.append("Error: Faltan argumentos. Uso: crear_proyecto nombre descripcion fechaLimite")
     except ValueError:
-        salida.append("Error: Fecha límite debe ser un número entero (formato AAAAMMDD)")
+        salida.append("Error: Fecha límite debe ser un número entero (formato AAAA-MM-DD)")
 
 

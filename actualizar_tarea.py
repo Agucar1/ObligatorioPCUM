@@ -51,6 +51,7 @@ def actualizar_tarea(args, proyectos, salida):
         tarea_encontrada["Estado"] = nuevo_estado.upper()
         
         # Mensaje de confirmación (formato exacto del obligatorio)
+        manejoJson.guardar_proyectos(proyectos)
         salida.append(f'Estado de la tarea "{nombre_tarea}" actualizado a "{nuevo_estado.upper()}".')
         
     except IndexError:

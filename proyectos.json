@@ -1,21 +1,28 @@
 {
     "1": {
-        "Nombre": "Obligatorio",
-        "Descripcion": "Pensamiento computacional",
-        "FechaLimite": 10052026,
+        "Nombre": "Proyecto1",
+        "Descripcion": "Descripción del proyecto",
+        "FechaLimite": "2025-06-30",
         "Tareas": {
             "1": {
-                "Nombre": "Funcionalidad crear proyecto",
-                "Descripcion": "Generar funcionalidad de crear y listar proyectos",
+                "Nombre": "Tarea1",
+                "Descripcion": "Descripción",
+                "Responsable": "Usuario",
+                "FechaLimite": "2025-06-15",
+                "Estado": "PENDIENTE"
+            }
+        }
+    },
+    "2": {
+        "Nombre": "ChatGPT 4.0",
+        "Descripcion": "Nueva IA",
+        "FechaLimite": "2026-10-10",
+        "Tareas": {
+            "1": {
+                "Nombre": "Prueba 2",
+                "Descripcion": "Validacion de fecha",
                 "Responsable": "Agustin",
-                "FechaLimite": 20250712,
-                "Estado": "COMPLETADA"
-            },
-            "2": {
-                "Nombre": "Funcionalidad crear tarea",
-                "Descripcion": "Generar funcionalidad de crear y listar proyectos",
-                "Responsable": "Agustin",
-                "FechaLimite": 20250712,
+                "FechaLimite": "2025-02-09",
                 "Estado": "COMPLETADA"
             }
         }
