@@ -1,3 +1,5 @@
+Proyecto por:
+Agustin Hernandez y Ricardo Melendez
 
 Funcionalidades del gestor de proyectos.
 

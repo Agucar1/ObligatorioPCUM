@@ -1,2 +1,2 @@
-=== Tareas del proyecto 'CHATGPT 4.0' ===
-- [1] Prueba 2 - Responsable: Agustin - Fecha limite: 2025-02-09- Estado: COMPLETADA 
+=== Tareas del proyecto 'ObligatorioPC' ===
+- [1] Gestion de proyectos de IA - Responsable: Ricardo - Fecha limite: 2025-04-30- Estado: PENDIENTE 

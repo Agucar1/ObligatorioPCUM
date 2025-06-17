@@ -1,89 +1,84 @@
-import unittest
-import sys
 import os
-
-# Agregar directorio actual para encontrar los módulos
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
 from guardar_salida_en_txt import guardar_salida_en_txt
 
+def limpiar_archivo(nombre):
+    if os.path.exists(nombre):
+        os.remove(nombre)
 
-class TestGuardarSalidaEnTxt(unittest.TestCase):
-    
-    def setUp(self):
-        """Configuración inicial para cada test"""
-        # Archivo de prueba que se puede eliminar después
-        self.archivo_prueba = "test_salida.txt"
-    
-    def tearDown(self):
-        """Limpiar archivos de prueba después de cada test"""
-        if os.path.exists(self.archivo_prueba):
-            os.remove(self.archivo_prueba)
-        if os.path.exists("salida.txt"):
-            os.remove("salida.txt")
-    
-    def test_guardar_salida_basica(self):
-        """Test: Guardar salida básica en archivo"""
-        salida = ["Línea 1", "Línea 2", "Línea 3"]
-        
-        guardar_salida_en_txt(salida, self.archivo_prueba)
-        
-        # Verificar que se creó el archivo
-        self.assertTrue(os.path.exists(self.archivo_prueba))
-        
-        # Leer el archivo y verificar contenido
-        with open(self.archivo_prueba, "r", encoding="utf-8") as f:
-            contenido = f.read()
-        
-        # Verificar que contiene las líneas esperadas
-        self.assertIn("Línea 1", contenido)
-        self.assertIn("Línea 2", contenido)
-        self.assertIn("Línea 3", contenido)
-    
-    def test_guardar_salida_vacia(self):
-        """Test: Guardar lista vacía"""
-        salida = []
-        
-        guardar_salida_en_txt(salida, self.archivo_prueba)
-        
-        # Verificar que se creó el archivo
-        self.assertTrue(os.path.exists(self.archivo_prueba))
-        
-        # Verificar que está vacío
-        with open(self.archivo_prueba, "r", encoding="utf-8") as f:
-            contenido = f.read()
-        
-        self.assertEqual(contenido, "")
-    
-    def test_guardar_salida_nombre_archivo_por_defecto(self):
-        """Test: Usar nombre de archivo por defecto"""
-        salida = ["Test archivo por defecto"]
-        
-        # No especificar nombre de archivo
-        guardar_salida_en_txt(salida)
-        
-        # Verificar que se creó "salida.txt"
-        self.assertTrue(os.path.exists("salida.txt"))
-        
-        # Verificar contenido
-        with open("salida.txt", "r", encoding="utf-8") as f:
-            contenido = f.read()
-        
-        self.assertIn("Test archivo por defecto", contenido)
-    
-    def test_guardar_salida_una_linea(self):
-        """Test: Guardar una sola línea"""
-        salida = ["Una sola línea"]
-        
-        guardar_salida_en_txt(salida, self.archivo_prueba)
-        
-        # Verificar contenido exacto
-        with open(self.archivo_prueba, "r", encoding="utf-8") as f:
-            lineas = f.readlines()
-        
-        self.assertEqual(len(lineas), 1)
-        self.assertEqual(lineas[0].strip(), "Una sola línea")
+def test_guardar_salida_basica():
+    salida = ["Línea 1", "Línea 2", "Línea 3"]
+    archivo = "test_salida.txt"
+    limpiar_archivo(archivo)
 
+    guardar_salida_en_txt(salida, archivo)
 
-if __name__ == '__main__':
-    unittest.main()
+    assert os.path.exists(archivo)
+    with open(archivo, "r", encoding="utf-8") as f:
+        contenido = f.read()
+    assert "Línea 1" in contenido
+    assert "Línea 2" in contenido
+    assert "Línea 3" in contenido
+
+    print("test_guardar_salida_basica: OK")
+    limpiar_archivo(archivo)
+
+def test_guardar_salida_vacia():
+    salida = []
+    archivo = "test_salida.txt"
+    limpiar_archivo(archivo)
+
+    guardar_salida_en_txt(salida, archivo)
+
+    assert os.path.exists(archivo)
+    with open(archivo, "r", encoding="utf-8") as f:
+        contenido = f.read()
+    assert contenido == ""
+
+    print("test_guardar_salida_vacia: OK")
+    limpiar_archivo(archivo)
+
+def test_guardar_salida_una_linea():
+    salida = ["Una sola línea"]
+    archivo = "test_salida.txt"
+    limpiar_archivo(archivo)
+
+    guardar_salida_en_txt(salida, archivo)
+
+    with open(archivo, "r", encoding="utf-8") as f:
+        lineas = f.readlines()
+    assert len(lineas) == 1
+    assert lineas[0].strip() == "Una sola línea"
+
+    print("test_guardar_salida_una_linea: OK")
+    limpiar_archivo(archivo)
+
+def test_guardar_salida_por_defecto():
+    salida = ["Texto por defecto"]
+    archivo = "salida.txt"
+    limpiar_archivo(archivo)
+
+    guardar_salida_en_txt(salida)
+
+    assert os.path.exists(archivo)
+    with open(archivo, "r", encoding="utf-8") as f:
+        contenido = f.read()
+    assert "Texto por defecto" in contenido
+
+    print("test_guardar_salida_por_defecto: OK")
+    limpiar_archivo(archivo)
+
+ 
+
+def ejecutar_tests():
+    print("=== TESTS SALIDA ===\n")
+
+    try:
+        test_guardar_salida_basica()
+        test_guardar_salida_vacia()
+        test_guardar_salida_una_linea()
+        test_guardar_salida_por_defecto()
+    except Exception as e:
+        print(f"\n ERROR: {e}")
+
+if __name__ == "__main__":
+    ejecutar_tests()

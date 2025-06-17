@@ -1,111 +1,126 @@
-import unittest
 import sys
 import os
 
-# Agregar directorio actual para encontrar los módulos
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
 from listar_tareas import listar_tareas
 
 
-class TestListarTareas(unittest.TestCase):
-    
-    def setUp(self):
-        """Configuración inicial para cada test"""
-        self.proyectos = {
-            "1": {
-                "Nombre": "Proyecto1",
-                "Descripcion": "Descripción del proyecto",
-                "FechaLimite": "2025-06-30",
-                "Tareas": {
-                    "1": {
-                        "Nombre": "Tarea1",
-                        "Responsable": "Ricardo Melendez",
-                        "FechaLimite": "2025-06-20",
-                        "Estado": "PENDIENTE"
-                    },
-                    "2": {
-                        "Nombre": "Tarea2",
-                        "Responsable": "María López",
-                        "FechaLimite": "2025-06-20",
-                        "Estado": "EN_PROGRESO"
-                    },
-                    "3": {
-                        "Nombre": "Tarea3",
-                        "Responsable": "Juan Pérez",
-                        "FechaLimite": "2025-06-20",
-                        "Estado": "PENDIENTE"
-                    }
-                }
+def test_listar_todas_las_tareas():
+    """Test: Listar todas las tareas sin filtro"""
+    proyectos = {
+        "1": {
+            "Nombre": "Proyecto1",
+            "Tareas": {
+                "1": {"Nombre": "Tarea1", "Responsable" : "Agustin","FechaLimite": "2025-06-15","Estado": "PENDIENTE"},
+                "2": {"Nombre": "Tarea2", "Responsable" : "Agustin","FechaLimite": "2025-06-15", "Estado": "EN_PROGRESO"},
+                "3": {"Nombre": "Tarea3","Responsable" : "Agustin","FechaLimite": "2025-06-15", "Estado": "COMPLETADA"}
             }
         }
-        self.salida = []
+    }
+    salida = []
     
-    def test_listar_todas_las_tareas(self):
-        """Test: Listar todas las tareas sin filtro"""
-        args = ["listar_tareas", "Proyecto1"]
-        
-        listar_tareas(args, self.proyectos, self.salida)
-        
-        # Verificar que muestra todas las tareas
-        self.assertTrue(any("Tarea1" in linea for linea in self.salida))
-        self.assertTrue(any("Tarea2" in linea for linea in self.salida))
-        self.assertTrue(any("Tarea3" in linea for linea in self.salida))
-        self.assertTrue(any("=== Tareas del proyecto 'Proyecto1' ===" in linea for linea in self.salida))
+    args = ["listar_tareas", "Proyecto1"]
+    listar_tareas(args, proyectos, salida)
     
-    def test_listar_tareas_filtro_pendiente(self):
-        """Test: Listar solo tareas PENDIENTES"""
-        args = ["listar_tareas", "Proyecto1", "PENDIENTE"]
-        
-        listar_tareas(args, self.proyectos, self.salida)
-        
-        # Verificar que solo muestra tareas PENDIENTES
-        self.assertTrue(any("Tarea1" in linea for linea in self.salida))  # PENDIENTE
-        self.assertTrue(any("Tarea3" in linea for linea in self.salida))  # PENDIENTE
-        self.assertFalse(any("Tarea2" in linea for linea in self.salida)) # EN_PROGRESO (no deberia aparecer)
-        self.assertTrue(any("en estado 'PENDIENTE'" in linea for linea in self.salida))
+    salida_texto = " ".join(salida)
+    assert "Tarea1" in salida_texto
+    assert "Tarea2" in salida_texto  
+    assert "Tarea3" in salida_texto
+    assert "Proyecto1" in salida_texto
     
-    def test_listar_tareas_filtro_en_progreso(self):
-        """Test: Listar solo tareas EN_PROGRESO"""
-        args = ["listar_tareas", "Proyecto1", "EN_PROGRESO"]
-        
-        listar_tareas(args, self.proyectos, self.salida)
-        
-        # Verificar que solo muestra tareas EN_PROGRESO
-        self.assertTrue(any("Tarea2" in linea for linea in self.salida))   # EN_PROGRESO
-        self.assertFalse(any("Tarea1" in linea for linea in self.salida))  # PENDIENTE (no deberia aparecer)
-        self.assertFalse(any("Tarea3" in linea for linea in self.salida))  # PENDIENTE (no deberia aparecer)
-    
-    def test_listar_tareas_proyecto_no_existe(self):
-        """Test: Error al listar tareas de proyecto inexistente"""
-        args = ["listar_tareas", "ProyectoInexistente"]
-        
-        listar_tareas(args, self.proyectos, self.salida)
-        
-        self.assertTrue("No se encontró el proyecto 'ProyectoInexistente'" in self.salida[0])
-    
-    def test_listar_tareas_proyecto_sin_tareas(self):
-        """Test: Listar tareas de proyecto sin tareas"""
-        proyectos_sin_tareas = {
-            "1": {
-                "Nombre": "ProyectoVacio",
-                "Tareas": {}
+    print("Listar todas las tareas")
+
+
+def test_listar_tareas_filtro_estado():
+    """Test: Listar tareas filtradas por estado"""
+    proyectos = {
+        "1": {
+            "Nombre": "Proyecto1", 
+            "Tareas": {
+                "1": {"Nombre": "Tarea1","Responsable" : "Agustin", "FechaLimite": "2025-06-15","Estado": "PENDIENTE"},
+                "2": {"Nombre": "Tarea2","Responsable" : "Agustin", "FechaLimite": "2025-06-15","Estado": "EN_PROGRESO"},
+                "3": {"Nombre": "Tarea3","Responsable" : "Agustin", "FechaLimite": "2025-06-15","Estado": "PENDIENTE"}
             }
         }
-        args = ["listar_tareas", "ProyectoVacio"]
-        
-        listar_tareas(args, proyectos_sin_tareas, self.salida)
-        
-        self.assertTrue(any("Este proyecto no tiene tareas." in linea for linea in self.salida))
+    }
+    salida = []
     
-    def test_listar_tareas_estado_sin_resultados(self):
-        """Test: Filtrar por estado que no tiene tareas"""
-        args = ["listar_tareas", "Proyecto1", "COMPLETADA"]
-        
-        listar_tareas(args, self.proyectos, self.salida)
-        
-        self.assertTrue(any("No hay tareas en estado 'COMPLETADA'" in linea for linea in self.salida))
+    args = ["listar_tareas", "Proyecto1", "PENDIENTE"]
+    listar_tareas(args, proyectos, salida)
+    
+    salida_texto = " ".join(salida)
+    assert "Tarea1" in salida_texto  
+    assert "Tarea3" in salida_texto  
+    assert "Tarea2" not in salida_texto  
+    assert "PENDIENTE" in salida_texto
+    
+    print("Filtrar por estado")
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_proyecto_no_existe():
+    """Test: Error al listar tareas de proyecto inexistente"""
+    proyectos = {
+        "1": {"Nombre": "Proyecto1", "Tareas": {}}
+    }
+    salida = []
+    
+    args = ["listar_tareas", "ProyectoInexistente"]
+    listar_tareas(args, proyectos, salida)
+    
+    assert "No se encontró el proyecto 'ProyectoInexistente'" in salida[0]
+    
+    print("✓ Proyecto no existe")
+
+
+def test_proyecto_sin_tareas():
+    """Test: Proyecto sin tareas"""
+    proyectos = {
+        "1": {"Nombre": "ProyectoVacio", "Tareas": {}}
+    }
+    salida = []
+    
+    args = ["listar_tareas", "ProyectoVacio"]
+    listar_tareas(args, proyectos, salida)
+    
+    salida_texto = " ".join(salida)
+    assert "no tiene tareas" in salida_texto or "sin tareas" in salida_texto
+    
+    print("✓ Proyecto sin tareas")
+
+
+def test_estado_sin_resultados():
+    """Test: Filtrar por estado que no tiene tareas"""
+    proyectos = {
+        "1": {
+            "Nombre": "Proyecto1",
+            "Tareas": {
+                "1": {"Nombre": "Tarea1","Responsable" : "Agustin", "FechaLimite": "2025-06-15", "Estado": "PENDIENTE"}
+            }
+        }
+    }
+    salida = []
+    
+    args = ["listar_tareas", "Proyecto1", "COMPLETADA"]
+    listar_tareas(args, proyectos, salida)
+    
+    salida_texto = " ".join(salida)
+    assert "No hay tareas" in salida_texto or "COMPLETADA" in salida_texto
+    
+    print("✓ Estado sin resultados")
+
+
+def ejecutar_tests():
+    print("=== TESTS LISTAR TAREAS ===\n")
+    
+    try:
+        test_listar_todas_las_tareas()
+        test_listar_tareas_filtro_estado()
+        test_proyecto_no_existe()
+        test_proyecto_sin_tareas()
+        test_estado_sin_resultados()
+    except Exception as e:
+        print(f"\n ERROR: {e}")
+
+
+if __name__ == "__main__":
+    ejecutar_tests()

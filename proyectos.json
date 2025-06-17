@@ -1,29 +1,99 @@
 {
     "1": {
-        "Nombre": "Proyecto1",
-        "Descripcion": "Descripción del proyecto",
-        "FechaLimite": "2025-06-30",
+        "Nombre": "Desarrollo Web",
+        "Descripcion": "Proyecto de sitio web corporativo",
+        "FechaLimite": "2025-08-30",
         "Tareas": {
             "1": {
-                "Nombre": "Tarea1",
-                "Descripcion": "Descripción",
-                "Responsable": "Usuario",
-                "FechaLimite": "2025-06-15",
+                "Nombre": "Diseño UI/UX",
+                "Descripcion": "Crear mockups y prototipos",
+                "Responsable": "Ana García",
+                "FechaLimite": "2025-07-15",
+                "Estado": "COMPLETADA"
+            },
+            "2": {
+                "Nombre": "Frontend React",
+                "Descripcion": "Desarrollar interfaz de usuario",
+                "Responsable": "Carlos López",
+                "FechaLimite": "2025-08-10",
+                "Estado": "EN_PROGRESO"
+            },
+            "3": {
+                "Nombre": "Backend API",
+                "Descripcion": "Crear servicios REST",
+                "Responsable": "María Rodríguez",
+                "FechaLimite": "2025-08-20",
                 "Estado": "PENDIENTE"
             }
         }
     },
     "2": {
-        "Nombre": "ChatGPT 4.0",
-        "Descripcion": "Nueva IA",
-        "FechaLimite": "2026-10-10",
+        "Nombre": "Marketing Digital",
+        "Descripcion": "Campaña de promoción online",
+        "FechaLimite": "2025-09-15",
         "Tareas": {
             "1": {
-                "Nombre": "Prueba 2",
-                "Descripcion": "Validacion de fecha",
-                "Responsable": "Agustin",
-                "FechaLimite": "2025-02-09",
+                "Nombre": "Investigación de mercado",
+                "Descripcion": "Analizar competencia y público objetivo",
+                "Responsable": "Luis Fernández",
+                "FechaLimite": "2025-07-30",
                 "Estado": "COMPLETADA"
+            },
+            "2": {
+                "Nombre": "Crear contenido",
+                "Descripcion": "Generar posts para redes sociales",
+                "Responsable": "Sofia Torres",
+                "FechaLimite": "2025-08-25",
+                "Estado": "EN_PROGRESO"
+            },
+            "3": {
+                "Nombre": "Lanzar campaña",
+                "Descripcion": "Publicar anuncios en plataformas",
+                "Responsable": "Diego Martín",
+                "FechaLimite": "2025-09-10",
+                "Estado": "PENDIENTE"
+            }
+        }
+    },
+    "3": {
+        "Nombre": "Sistema Inventario",
+        "Descripcion": "Aplicación para gestión de stock",
+        "FechaLimite": "2025-10-31",
+        "Tareas": {
+            "1": {
+                "Nombre": "Base de datos",
+                "Descripcion": "Diseñar esquema y tablas",
+                "Responsable": "Roberto Silva",
+                "FechaLimite": "2025-08-15",
+                "Estado": "COMPLETADA"
+            },
+            "2": {
+                "Nombre": "Módulo productos",
+                "Descripcion": "CRUD de artículos del inventario",
+                "Responsable": "Patricia Vega",
+                "FechaLimite": "2025-09-30",
+                "Estado": "EN_PROGRESO"
+            },
+            "3": {
+                "Nombre": "Reportes",
+                "Descripcion": "Dashboard con métricas y gráficos",
+                "Responsable": "Fernando Castro",
+                "FechaLimite": "2025-10-25",
+                "Estado": "PENDIENTE"
+            }
+        }
+    },
+    "4": {
+        "Nombre": "ObligatorioPC",
+        "Descripcion": "Pensamiento computacional",
+        "FechaLimite": "2025-05-30",
+        "Tareas": {
+            "1": {
+                "Nombre": "Gestion de proyectos de IA",
+                "Descripcion": "Validacion de funcionalidad",
+                "Responsable": "Ricardo",
+                "FechaLimite": "2025-04-30",
+                "Estado": "PENDIENTE"
             }
         }
     }
